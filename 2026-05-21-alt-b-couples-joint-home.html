@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Couples · Joint Home · Alt B · Rabobank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fafaf7; --paper: #fff; --ink: #0a0a0a; --ink-2: #595754; --ink-3: #a8a6a3;
+    --line: rgba(10,10,10,0.10); --line-2: rgba(10,10,10,0.05); --card: #f4f4f4;
+    --rabo-blue: #0072F5; --rabo-blue-soft: rgba(0,114,245,0.10);
+    --rabo-navy: #001940; --rabo-alert: #D8380E;
+    --rabo-brand: #fa5c1e; --rabo-green: #2d7a4f; --rabo-amber: #b87333;
+    --accent: var(--rabo-amber); --accent-soft: rgba(184,115,51,0.10);
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body { font-family: var(--sans); font-size: 19px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1080px; margin: 0 auto; padding: 96px 56px 200px; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 48px; }
+  .eyebrow .rabo-mark { display: inline-block; width: 9px; height: 9px; background: var(--rabo-brand); border-radius: 50%; margin-right: 10px; vertical-align: 1px; }
+  .eyebrow .alt-tag { color: var(--accent); margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--line); }
+
+  .hero-title { font-family: var(--serif); font-weight: 400; font-size: 84px; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin: 0; max-width: 14em; }
+  .hero-title em { font-style: italic; }
+  .hero-title .softer { color: var(--ink-2); font-style: italic; }
+  .hero-sub { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; color: var(--ink-2); margin: 40px 0 0; max-width: 30em; }
+  .hero-sub em { color: var(--ink); }
+
+  .step { padding-top: 120px; border-top: 1px solid var(--line); margin-top: 120px; }
+  .step-num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 28px; }
+  .step-num .sep { color: var(--ink-3); margin: 0 10px; }
+  .step-num .pillar { color: var(--accent); }
+  .step-num .mockup-tag { color: var(--rabo-brand); }
+  .step-hero { font-family: var(--serif); font-weight: 400; font-size: 60px; line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin: 0 0 32px; max-width: 16em; }
+  .step-hero em { font-style: italic; }
+  .step-hero .softer { color: var(--ink-2); font-style: italic; }
+  .step-lede { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.45; color: var(--ink-2); margin: 0 0 56px; max-width: 32em; }
+  .step-lede em { color: var(--ink); }
+
+  .gap-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 24px; align-items: start; }
+  .gap-pair > div { padding-top: 18px; border-top: 2px solid var(--ink); }
+  .gap-pair > div.right { border-top-color: var(--accent); }
+  .gap-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
+  .gap-pair > div.right .gap-label { color: var(--accent); }
+  .gap-line { font-family: var(--serif); font-size: 22px; line-height: 1.4; color: var(--ink); margin: 0; }
+  .gap-line em { font-style: italic; }
+  .gap-line .softer { color: var(--ink-2); }
+
+  .mockup-wrap { display: flex; gap: 72px; align-items: center; padding: 88px 0 16px; margin-top: 64px; }
+  .mockup-wrap.right { flex-direction: row-reverse; }
+  .caption { flex: 1; }
+  .caption .cap-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .caption .cap-title { font-family: var(--serif); font-style: italic; font-size: 38px; line-height: 1.2; color: var(--ink); margin: 0 0 20px; letter-spacing: -0.01em; }
+  .caption .cap-body { font-size: 19px; color: var(--ink-2); line-height: 1.55; margin: 0; max-width: 22em; }
+  .caption .cap-body em { color: var(--ink); font-style: italic; }
+
+  .phone { width: 320px; height: 680px; background: #1a1a1c; border: 1px solid rgba(10,10,10,0.10); border-radius: 46px; padding: 11px; box-shadow: 0 50px 100px rgba(10,10,10,0.16), 0 12px 32px rgba(10,10,10,0.08); flex-shrink: 0; position: relative; }
+  .screen { width: 100%; height: 100%; background: var(--paper); border-radius: 36px; overflow: hidden; position: relative; color: var(--ink); font-family: var(--sans); font-size: 12px; }
+  .notch { position: absolute; top: 19px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; background: #000; border-radius: 16px; z-index: 2; }
+  .status { position: absolute; top: 19px; left: 22px; right: 22px; display: flex; justify-content: space-between; align-items: center; z-index: 3; font-family: var(--mono); font-size: 12px; color: var(--ink); letter-spacing: 0.04em; }
+  .status .right { display: inline-flex; gap: 4px; align-items: center; }
+  .status .signal { width: 14px; height: 9px; background: linear-gradient(90deg, var(--ink) 80%, rgba(10,10,10,0.2) 80%); border-radius: 2px; }
+  .status .batt { display: inline-block; width: 22px; height: 11px; border: 1px solid rgba(10,10,10,0.5); border-radius: 3px; position: relative; }
+  .status .batt::after { content: ""; position: absolute; right: -3px; top: 3px; width: 2px; height: 5px; background: rgba(10,10,10,0.5); border-radius: 1px; }
+  .status .batt::before { content: ""; position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: var(--ink); border-radius: 1px; }
+  .screen-inner { padding: 64px 20px 20px; height: 100%; display: flex; flex-direction: column; }
+  .num-tabular { font-variant-numeric: tabular-nums; }
+
+  .rabo-topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .rabo-topbar .ico { width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; position: relative; }
+  .rabo-topbar .ico::before { content: ""; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 1.5px; height: 8px; background: var(--ink); }
+  .rabo-topbar .title { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--accent); }
+  .rabo-topbar .actions { display: flex; gap: 12px; }
+  .rabo-topbar .actions span { width: 18px; height: 18px; border: 1.5px solid var(--ink); display: inline-block; }
+  .rabo-topbar .actions .search { border-radius: 50%; }
+  .rabo-topbar .actions .chat { border-radius: 4px 4px 4px 0; }
+
+  /* M1 · Joint goal */
+  .m1-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8px; }
+  .m1-couple { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .m1-couple .av { width: 32px; height: 32px; border-radius: 50%; font-family: var(--mono); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; color: var(--paper); }
+  .m1-couple .av.her { background: linear-gradient(135deg, #d46a6a, #a44040); }
+  .m1-couple .av.him { background: linear-gradient(135deg, #5a8ad4, #2c4a8a); }
+  .m1-couple .names { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink); }
+  .m1-title { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.15; color: var(--ink); margin: 0 0 16px; }
+  .m1-goal { padding: 14px; background: var(--accent-soft); border-radius: 14px; margin-bottom: 14px; }
+  .m1-goal .target { font-family: var(--serif); font-size: 28px; color: var(--accent); line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+  .m1-goal .when { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+  .m1-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-2); font-size: 13px; }
+  .m1-row:last-of-type { border-bottom: none; }
+  .m1-row .lbl { color: var(--ink-2); }
+  .m1-row .val { font-family: var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .m1-split { margin-top: 12px; padding: 12px; background: var(--card); border-radius: 12px; font-size: 12px; line-height: 1.5; }
+  .m1-split strong { color: var(--accent); }
+  .m1-cta { margin-top: auto; background: var(--accent); color: var(--paper); padding: 13px 0; border-radius: 12px; font-size: 13px; font-weight: 600; text-align: center; }
+
+  /* M2 · Joint dashboard */
+  .m2-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8px; }
+  .m2-title { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.15; color: var(--ink); margin: 0 0 14px; }
+  .m2-progress { padding: 14px; background: var(--card); border-radius: 12px; margin-bottom: 14px; }
+  .m2-progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .m2-progress-amt { font-family: var(--sans); font-weight: 700; font-size: 20px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .m2-progress-of { font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .m2-bar { height: 8px; background: rgba(184,115,51,0.18); border-radius: 4px; overflow: hidden; }
+  .m2-bar .fill { height: 100%; width: 45%; background: var(--accent); border-radius: 4px; }
+  .m2-progress-meta { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.05em; margin-top: 6px; font-weight: 600; }
+  .m2-split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .m2-split-card { padding: 10px; background: var(--card); border-radius: 10px; }
+  .m2-split-card .who { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 4px; }
+  .m2-split-card .amt { font-family: var(--serif); font-size: 18px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; }
+  .m2-split-card .sub { font-family: var(--mono); font-size: 9px; color: var(--ink-2); margin-top: 4px; letter-spacing: 0.04em; }
+  .m2-cap { padding: 12px; background: var(--accent-soft); border-radius: 12px; font-size: 12px; line-height: 1.5; }
+  .m2-cap .lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .m2-cap .val { font-family: var(--serif); font-size: 18px; color: var(--ink); line-height: 1.1; }
+  .m2-cap .sub { font-size: 11px; color: var(--ink-2); margin-top: 6px; }
+
+  /* M3 · Couple check-in */
+  .m3-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .m3-title { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.15; color: var(--ink); margin: 0 0 8px; }
+  .m3-sub { font-size: 12px; color: var(--ink-2); margin-bottom: 22px; line-height: 1.5; }
+  .m3-card { padding: 16px; background: var(--card); border-radius: 14px; margin-bottom: 12px; }
+  .m3-card .q { font-family: var(--serif); font-size: 15px; line-height: 1.35; color: var(--ink); margin-bottom: 12px; }
+  .m3-card .options { display: flex; gap: 6px; }
+  .m3-card .opt { flex: 1; padding: 8px 0; border: 1px solid var(--line); border-radius: 8px; font-family: var(--mono); font-size: 10px; text-align: center; color: var(--ink-2); letter-spacing: 0.04em; }
+  .m3-card .opt.active { background: var(--accent-soft); border-color: rgba(184,115,51,0.4); color: var(--accent); font-weight: 600; }
+  .m3-progress-mini { padding: 10px 12px; background: var(--accent-soft); border-radius: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; font-size: 11px; }
+  .m3-progress-mini .lbl { color: var(--ink); }
+  .m3-progress-mini .val { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+  .m3-footer { margin-top: auto; text-align: center; font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); padding-top: 16px; }
+
+  .prose-section { margin-top: 144px; padding-top: 96px; border-top: 1px solid var(--line); }
+  .section-eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px; }
+  .section-title { font-family: var(--serif); font-size: 52px; line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin: 0 0 32px; font-weight: 400; max-width: 16em; }
+  .section-title em { font-style: italic; }
+  .section-title .softer { color: var(--ink-2); font-style: italic; }
+  .section-title .accent { color: var(--accent); }
+  .prose { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.5; color: var(--ink-2); max-width: 32em; margin: 0; }
+  .prose em { color: var(--ink); }
+
+  .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; }
+  .month { border-top: 3px solid var(--line); padding-top: 22px; position: relative; }
+  .month::before { content: ""; position: absolute; top: -8px; left: 0; width: 13px; height: 13px; background: var(--bg); border: 3px solid var(--line); border-radius: 50%; }
+  .month.m1::before { border-color: var(--accent); }
+  .month.m3::before { border-color: var(--rabo-blue); background: var(--rabo-blue); }
+  .month.m45::before { border-color: var(--rabo-brand); background: var(--rabo-brand); }
+  .month.m6::before { border-color: var(--rabo-green); background: var(--rabo-green); }
+  .month .when { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+  .month .what { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--ink); margin: 0 0 14px; line-height: 1.15; }
+  .month .detail { font-size: 15px; color: var(--ink-2); line-height: 1.5; margin: 0; }
+  .month .detail em { color: var(--ink); font-style: italic; }
+
+  .epilog-title { font-family: var(--serif); font-size: 72px; line-height: 1.04; color: var(--ink); letter-spacing: -0.02em; margin: 0 0 32px; max-width: 14em; }
+  .epilog-title em { font-style: italic; }
+  .epilog-title .softer { color: var(--ink-2); font-style: italic; }
+  .epilog-tag { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--accent); margin: 56px 0 0; }
+  .foot { margin-top: 144px; padding-top: 56px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); display: flex; justify-content: space-between; align-items: center; }
+  .foot .rabo-tag { color: var(--rabo-brand); }
+  .foot .alt-tag { color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .page { padding: 56px 24px 96px; }
+    .hero-title { font-size: 48px; }
+    .step-hero { font-size: 40px; }
+    .section-title { font-size: 36px; }
+    .epilog-title { font-size: 48px; }
+    .gap-pair { grid-template-columns: 1fr; gap: 32px; }
+    .mockup-wrap, .mockup-wrap.right { flex-direction: column; gap: 40px; padding: 56px 0 8px; }
+    .phone { margin: 0 auto; }
+    .roadmap { grid-template-columns: 1fr 1fr; }
+    .caption .cap-title { font-size: 28px; }
+    .caption .cap-body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- HERO -->
+  <section>
+    <div class="eyebrow"><span class="rabo-mark"></span>Rabobank · Growth Accelerator 0–30<span class="alt-tag">Alternative B · Couples</span></div>
+    <h1 class="hero-title">
+      Buying a home together is a <em>four-year</em> conversation.<br/>
+      <span class="softer">Banks join in <em>year four.</em></span>
+    </h1>
+    <p class="hero-sub">
+      Maya &amp; Sven, samenwoners for 18 months. One shared goal: their first home by 2028.<br/>
+      Three product moments where Rabobank can be <em>the third partner</em> in that conversation.
+    </p>
+  </section>
+
+  <!-- 00 · TRIGGER -->
+  <section class="step">
+    <div class="step-num">00 <span class="sep">·</span> Trigger</div>
+    <h2 class="step-hero">"We want to buy. <span class="softer"><em>We don't know if we're close.</em></span>"</h2>
+    <p class="step-lede">Maya and Sven live together. They both work. They share rent, groceries, holidays. <em>But their money lives in two apps, two views, two spreadsheets.</em></p>
+    <div class="gap-pair">
+      <div>
+        <div class="gap-label">Today</div>
+        <p class="gap-line">Two separate banking apps. <span class="softer">Two separate savings goals.</span> A shared spreadsheet that nobody updates. <em>The mortgage advisor will say "come back at €40K."</em></p>
+      </div>
+      <div class="right">
+        <div class="gap-label">Rabobank can</div>
+        <p class="gap-line">Be the <em>shared space</em> for the goal — for four years, not four meetings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 · JOINT GOAL · M1 -->
+  <section class="step">
+    <div class="step-num">01 <span class="sep">·</span> <span class="pillar">Joint goal</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M1</span></div>
+    <h2 class="step-hero">Set the goal <em>as a couple</em> — not as two people with a shared spreadsheet.</h2>
+    <p class="step-lede">One target. One date. <em>One fair split based on income.</em> A shared savings widget that lives in both apps, looks the same, updates together.</p>
+
+    <div class="mockup-wrap">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">Our first home</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="m1-eyebrow">Joint goal · setup</div>
+          <div class="m1-couple">
+            <span class="av her">M</span><span class="av him">S</span>
+            <span class="names">Maya &amp; Sven</span>
+          </div>
+          <h3 class="m1-title">Our first home</h3>
+
+          <div class="m1-goal">
+            <div class="target num-tabular">€40,000</div>
+            <div class="when">Sep 2028 · 48 months</div>
+          </div>
+
+          <div class="m1-row"><span class="lbl">Today, together</span><span class="val">€18,400</span></div>
+          <div class="m1-row"><span class="lbl">Monthly · auto</span><span class="val">€600</span></div>
+          <div class="m1-row"><span class="lbl">Joint mortgage cap</span><span class="val">€280K</span></div>
+
+          <div class="m1-split">
+            <strong>Fair split:</strong> Sven contributes <strong>€360</strong>, Maya contributes <strong>€240</strong>. Pro rata by income — they both agreed. Adjustable anytime.
+          </div>
+
+          <div class="m1-cta">Open joint goal</div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M1 · Joint goal</div>
+        <h3 class="cap-title">One goal, <em>visible to both.</em></h3>
+        <p class="cap-body">Same screen for Maya, same screen for Sven. <em>No "who's tracking it" question.</em> The bank holds the goal — they hold each other.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · JOINT DASHBOARD · M2 -->
+  <section class="step">
+    <div class="step-num">02 <span class="sep">·</span> <span class="pillar">Joint visibility</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M2 · the differentiator</span></div>
+    <h2 class="step-hero">A dashboard that knows <em>'we'</em> — not just <em>'me'</em>.</h2>
+    <p class="step-lede">Combined savings. Combined income. Combined mortgage readiness. <em>And — visibly — who contributed what.</em></p>
+
+    <div class="mockup-wrap right">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">Our home · dashboard</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="m2-eyebrow">September · together</div>
+          <h3 class="m2-title">€18,400 saved</h3>
+
+          <div class="m2-progress">
+            <div class="m2-progress-top">
+              <span class="m2-progress-amt num-tabular">46%</span>
+              <span class="m2-progress-of">€18,400 of €40,000</span>
+            </div>
+            <div class="m2-bar"><div class="fill"></div></div>
+            <div class="m2-progress-meta">On track · NHG eligible in 14 months</div>
+          </div>
+
+          <div class="m2-split-row">
+            <div class="m2-split-card">
+              <div class="who">Sven · this year</div>
+              <div class="amt num-tabular">€4,320</div>
+              <div class="sub">€360/mo · auto</div>
+            </div>
+            <div class="m2-split-card">
+              <div class="who">Maya · this year</div>
+              <div class="amt num-tabular">€2,880</div>
+              <div class="sub">€240/mo · auto</div>
+            </div>
+          </div>
+
+          <div class="m2-cap">
+            <div class="lbl">Joint mortgage capacity</div>
+            <div class="val">€280K · NHG eligible at €40K saved</div>
+            <div class="sub">Based on combined income €7,300/mo · adjusted for shared housing costs.</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M2 · The differentiator</div>
+        <h3 class="cap-title">'We' as a <em>first-class</em> entity in the bank.</h3>
+        <p class="cap-body">Two people, one financial life, one screen. <em>Income, savings, mortgage capacity — all calculated together, all visible to both.</em> Couples don't have to build a spreadsheet to see themselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · COUPLE CHECK-IN · M3 -->
+  <section class="step">
+    <div class="step-num">03 <span class="sep">·</span> <span class="pillar">Monthly ritual</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M3</span></div>
+    <h2 class="step-hero">A goal of four years <em>needs a small conversation every month.</em></h2>
+    <p class="step-lede">Not a chore. <em>A two-minute prompt — both phones light up at the same time, Sunday morning.</em> Three questions. A scrollable decision log builds over four years.</p>
+
+    <div class="mockup-wrap">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">Sunday check-in</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="m3-eyebrow">September · together · 11:00</div>
+          <h3 class="m3-title">Two minutes, together.</h3>
+          <p class="m3-sub">Both your phones got this. The answers are saved as a couple — for your next year.</p>
+
+          <div class="m3-progress-mini">
+            <span class="lbl">This month</span>
+            <span class="val num-tabular">+€600 saved · on track</span>
+          </div>
+
+          <div class="m3-card">
+            <div class="q">How are we feeling about the goal?</div>
+            <div class="options">
+              <span class="opt">Worried</span>
+              <span class="opt active">Steady</span>
+              <span class="opt">Excited</span>
+            </div>
+          </div>
+
+          <div class="m3-card">
+            <div class="q">Should we adjust the monthly amount?</div>
+            <div class="options">
+              <span class="opt">Lower</span>
+              <span class="opt active">Keep €600</span>
+              <span class="opt">Higher</span>
+            </div>
+          </div>
+
+          <div class="m3-card">
+            <div class="q">Any life changes this month?</div>
+            <div class="options">
+              <span class="opt active">No</span>
+              <span class="opt">Yes</span>
+            </div>
+          </div>
+
+          <div class="m3-footer">12 of 48 check-ins · the log is yours</div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M3 · The ritual</div>
+        <h3 class="cap-title">A four-year decision log, <em>built two minutes at a time.</em></h3>
+        <p class="cap-body">Couples don't fail because the goal is wrong — they fail because the conversation drifts. <em>A tiny monthly prompt keeps both partners in the same story.</em> No advisor can match that consistency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENCHMARK -->
+  <section class="prose-section">
+    <div class="section-eyebrow">The wedge · 'we' as a customer</div>
+    <h2 class="section-title">Who builds for <span class="accent"><em>two people, one life</em></span>?</h2>
+    <p class="prose">Most banking apps treat every account as an individual. <em>Joint accounts exist — but joint goals, joint dashboards, joint mortgage prep do not.</em> Bunq lets couples share a card. Revolut lets couples share a wallet. Neither holds a four-year shared goal. <em>The 'we' customer is invisible to fintech — and visible to Rabobank, where joint mortgages already are core business.</em></p>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="prose-section">
+    <div class="section-eyebrow">First 6 months · tangible</div>
+    <h2 class="section-title">Four milestones. <span class="softer">Built on top of Rabobank's existing joint-account product.</span></h2>
+    <div class="roadmap">
+      <div class="month m1"><div class="when">Month 1–2</div><h3 class="what">Discovery</h3><p class="detail">Interview 20 samenwonen couples saving toward a first home. <em>What stops the conversation?</em></p></div>
+      <div class="month m3"><div class="when">Month 3</div><h3 class="what">First MVP</h3><p class="detail">Joint Savings Widget + joint mortgage capacity view. <em>One screen, two phones.</em></p></div>
+      <div class="month m45"><div class="when">Month 4–5</div><h3 class="what">Pilot</h3><p class="detail">100 couples · 6-month observation. Add the monthly Sunday check-in.</p></div>
+      <div class="month m6"><div class="when">Month 6</div><h3 class="what">First metric report</h3><p class="detail"><em>% of couples who complete 6 monthly check-ins.</em> Plus: average savings velocity vs. pre-product baseline.</p></div>
+    </div>
+  </section>
+
+  <!-- EPILOG -->
+  <section class="prose-section">
+    <div class="section-eyebrow">Epilog</div>
+    <h2 class="epilog-title">
+      Banks meet couples <em>on application day.</em><br/>
+      <span class="softer">We can meet them <em>four years earlier.</em></span>
+    </h2>
+    <p class="epilog-tag">The 'we' customer<br/>is the next product surface.</p>
+    <div class="foot">
+      <span>Couples · Joint Home · An alternative bet</span>
+      <span class="alt-tag">Rabobank · 2026-05-21</span>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

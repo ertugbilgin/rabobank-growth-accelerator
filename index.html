@@ -272,7 +272,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
   }
   .card .pitch { font-size: 24px; line-height: 1.2; }
@@ -486,9 +486,10 @@
   <div class="brand"><span class="mark"></span><strong>Rabobank</strong> · Growth Accelerator 0–30 · 2026-05-21</div>
   <nav class="tabs" id="tabs">
     <button class="tab active" data-id="home"><span class="dot"></span>Overview</button>
-    <button class="tab" data-id="main"><span class="dot"></span>Age 18 · Shared Wallet</button>
-    <button class="tab" data-id="alt-a"><span class="dot"></span>Age 22 · DUO</button>
-    <button class="tab" data-id="alt-b"><span class="dot"></span>Age 28 · First Home</button>
+    <button class="tab" data-id="main"><span class="dot"></span>Housemates · Shared Wallet</button>
+    <button class="tab" data-id="alt-a"><span class="dot"></span>Friends · Berlin Trip</button>
+    <button class="tab" data-id="alt-b"><span class="dot"></span>Couples · Joint Home</button>
+    <button class="tab" data-id="alt-c"><span class="dot"></span>Subscriptions · Streaming Pool</button>
   </nav>
   <div class="help">Tab <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
 </header>
@@ -500,11 +501,11 @@
     <div class="home-wrap">
       <div class="home-eyebrow">Rabobank · Growth Accelerator 18–30 · Shared Wallet / Social Finance</div>
       <h1 class="home-title">
-        <em>One customer.</em> One bank.<br/>
-        <span class="softer">Three moments along <em>the 18–30 path.</em></span>
+        <em>From housemates and couples</em><br/>
+        <span class="softer">to friends and <em>subscriptions.</em></span>
       </h1>
       <p class="home-sub">
-        Primary bet at age 18 — <em>Shared Wallet.</em> Around it, two longer-arc bets I considered: <em>age 22 and age 28.</em>
+        Four shared finance moments — <em>not a portfolio of features.</em> Primary bet on housemates: <em>Shared Wallet.</em> Three more shared moments around it.
       </p>
 
       <!-- ═══ THE PATH ═══ -->
@@ -513,25 +514,32 @@
           <div class="path-seg seg-main"></div>
           <div class="path-seg seg-a"></div>
           <div class="path-seg seg-b"></div>
+          <div class="path-seg seg-c"></div>
         </div>
         <div class="path-stations">
           <div class="path-station main" data-target="main">
             <div class="path-dot"></div>
-            <div class="age">Age 18</div>
+            <div class="age">Housemates</div>
             <div class="moment">Shared Wallet</div>
             <div class="role">Primary</div>
           </div>
           <div class="path-station a" data-target="alt-a">
             <div class="path-dot"></div>
-            <div class="age">Age 22</div>
-            <div class="moment">DUO Companion</div>
+            <div class="age">Friends</div>
+            <div class="moment">Berlin Trip</div>
             <div class="role">Alternative A</div>
           </div>
           <div class="path-station b" data-target="alt-b">
             <div class="path-dot"></div>
-            <div class="age">Age 28</div>
-            <div class="moment">First Home Path</div>
+            <div class="age">Couples</div>
+            <div class="moment">Joint Home</div>
             <div class="role">Alternative B</div>
+          </div>
+          <div class="path-station c" data-target="alt-c">
+            <div class="path-dot"></div>
+            <div class="age">Subscriptions</div>
+            <div class="moment">Streaming Pool</div>
+            <div class="role">Alternative C</div>
           </div>
         </div>
       </div>
@@ -546,14 +554,20 @@
         </article>
 
         <article class="card alt-a" data-target="alt-a">
-          <h2 class="pitch">"You repay it for 35 years. <em>Your bank has never mentioned it.</em>"</h2>
-          <p class="body">A 27-year-old, four years into a DUO loan she barely understands. <em>The largest line item in a Dutch graduate's life — and no bank treats it as a relationship.</em></p>
+          <h2 class="pitch">"The trip ends Sunday. <em>The settlement ends never.</em>"</h2>
+          <p class="body">Six friends. One weekend in Berlin. <em>Three months of figuring out who owes who.</em> The trip is a unit Rabobank can own — beginning, middle, and the Sunday after.</p>
           <span class="open">Open this moment <span class="arrow">→</span></span>
         </article>
 
         <article class="card alt-b" data-target="alt-b">
-          <h2 class="pitch">"Banks talk the day you apply. <em>We can start four years earlier.</em>"</h2>
-          <p class="body">A 26-year-old, three years from a mortgage application, zero guidance in between. <em>The four-year companion the housing crisis demands.</em></p>
+          <h2 class="pitch">"Buying together is a four-year conversation. <em>Banks join in year four.</em>"</h2>
+          <p class="body">Maya & Sven, samenwoners for 18 months. <em>One shared goal: their first home by 2028.</em> Rabobank can be the third partner in that conversation — for four years, not four meetings.</p>
+          <span class="open">Open this moment <span class="arrow">→</span></span>
+        </article>
+
+        <article class="card alt-c" data-target="alt-c">
+          <h2 class="pitch">"Five tabs. Five payers. <em>One forgotten reminder a month.</em>"</h2>
+          <p class="body">Four housemates pay €71/month in shared subscriptions — paid by one, owed by all. <em>Rabobank already sees the recurring charges.</em> The product moment is doing something about it.</p>
           <span class="open">Open this moment <span class="arrow">→</span></span>
         </article>
 
@@ -561,7 +575,7 @@
 
       <p class="home-footnote">
         <span class="blue">Walking the path in the interview</span><br/>
-        Open with Age 18 — Shared Wallet, the brief's literal answer. The other two are future bets I considered along the same 18–30 arc.
+        Open with Housemates — Shared Wallet, the brief's literal answer. The other three are different shared finance moments I considered around it.
       </p>
     </div>
   </section>
@@ -571,10 +585,13 @@
     <iframe data-src="2026-05-21-shared-wallet-journey-rabobank.html" title="Shared Wallet journey"></iframe>
   </section>
   <section class="panel" data-id="alt-a">
-    <iframe data-src="2026-05-21-alt-a-duo-companion.html" title="DUO Companion journey"></iframe>
+    <iframe data-src="2026-05-21-alt-a-friends-berlin-trip.html" title="Friends Berlin Trip journey"></iframe>
   </section>
   <section class="panel" data-id="alt-b">
-    <iframe data-src="2026-05-21-alt-b-first-home-path.html" title="First Home Path journey"></iframe>
+    <iframe data-src="2026-05-21-alt-b-couples-joint-home.html" title="Couples Joint Home journey"></iframe>
+  </section>
+  <section class="panel" data-id="alt-c">
+    <iframe data-src="2026-05-21-alt-c-subscriptions-pool.html" title="Subscriptions Pool journey"></iframe>
   </section>
 
 </main>
@@ -605,13 +622,14 @@
   const navNextName = document.getElementById('navNextName');
   const loadedFrames = new Set();
 
-  // Chronological order — 18–30 arc
-  const journeyOrder = ['main', 'alt-a', 'alt-b'];
+  // Persona-based · 4 shared finance moments
+  const journeyOrder = ['main', 'alt-a', 'alt-b', 'alt-c'];
   const journeyLabels = {
     'home': 'Overview',
-    'main':  'Age 18 · Shared Wallet',
-    'alt-a': 'Age 22 · DUO Companion',
-    'alt-b': 'Age 28 · First Home Path',
+    'main':  'Housemates · Shared Wallet',
+    'alt-a': 'Friends · Berlin Trip',
+    'alt-b': 'Couples · Joint Home',
+    'alt-c': 'Subscriptions · Streaming Pool',
   };
 
   // Auto-resize iframe to its content height (same-origin: safe)
@@ -701,7 +719,7 @@
 
   // Keyboard nav
   document.addEventListener('keydown', (e) => {
-    const order = ['home', 'main', 'alt-a', 'alt-b'];
+    const order = ['home', 'main', 'alt-a', 'alt-b', 'alt-c'];
     const current = document.querySelector('.tab.active').dataset.id;
     const idx = order.indexOf(current);
     if (e.key === 'ArrowRight') activate(order[(idx + 1) % order.length]);
