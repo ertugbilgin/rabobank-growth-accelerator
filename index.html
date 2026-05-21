@@ -55,7 +55,9 @@
     gap: 4px;
     flex: 1;
     overflow-x: auto;
+    scrollbar-width: none;
   }
+  .tabs::-webkit-scrollbar { display: none; }
   .tab {
     padding: 9px 18px;
     border-radius: 999px;
@@ -132,6 +134,7 @@
   }
   .panel iframe {
     width: 100%;
+    height: auto;
     min-height: 100%;
     border: none;
     background: var(--bg);
@@ -390,6 +393,60 @@
   .back-pill.visible { display: inline-flex; align-items: center; gap: 8px; }
   .back-pill:hover { background: var(--rabo-blue); }
 
+  /* Bottom journey nav — prev / next moment */
+  .journey-nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: none;
+    gap: 4px;
+    background: var(--paper);
+    padding: 8px;
+    border-radius: 999px;
+    box-shadow: 0 12px 36px rgba(10,10,10,0.18), 0 2px 8px rgba(10,10,10,0.06);
+    border: 1px solid var(--line);
+    align-items: center;
+  }
+  .journey-nav.visible { display: inline-flex; }
+  .journey-nav .jbtn {
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .journey-nav .jbtn:hover { background: var(--bg); }
+  .journey-nav .jbtn[data-disabled="true"] { opacity: 0.3; pointer-events: none; }
+  .journey-nav .jbtn .name {
+    font-family: var(--serif);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .journey-nav .jbtn.next { background: var(--ink); color: var(--paper); }
+  .journey-nav .jbtn.next:hover { background: var(--rabo-blue); }
+  .journey-nav .jbtn.next .name { color: var(--paper); }
+  .journey-nav .divider { width: 1px; height: 22px; background: var(--line); }
+  @media (max-width: 760px) {
+    .journey-nav { bottom: 12px; padding: 6px; }
+    .journey-nav .jbtn { padding: 8px 12px; gap: 6px; }
+    .journey-nav .jbtn .name { display: none; }
+  }
+
   @media (max-width: 1100px) {
     .grid { grid-template-columns: 1fr 1fr; }
     .path-track { margin: 0 6%; }
@@ -535,26 +592,89 @@
 
 <button class="back-pill" id="backPill">← Overview</button>
 
+<nav class="journey-nav" id="journeyNav">
+  <button class="jbtn prev" id="navPrev">
+    <span>←</span>
+    <span class="name" id="navPrevName">Previous</span>
+  </button>
+  <span class="divider"></span>
+  <button class="jbtn next" id="navNext">
+    <span class="name" id="navNextName">Next</span>
+    <span>→</span>
+  </button>
+</nav>
+
 <script>
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
   const cards = document.querySelectorAll('.card[data-target]');
   const backPill = document.getElementById('backPill');
+  const journeyNav = document.getElementById('journeyNav');
+  const navPrev = document.getElementById('navPrev');
+  const navNext = document.getElementById('navNext');
+  const navPrevName = document.getElementById('navPrevName');
+  const navNextName = document.getElementById('navNextName');
   const loadedFrames = new Set();
+
+  // Chronological order — the 25-year arc
+  const journeyOrder = ['alt-c', 'main', 'alt-a', 'alt-b'];
+  const journeyLabels = {
+    'home': 'Overview',
+    'alt-c': 'Age 11 · First Goal',
+    'main':  'Age 18 · Shared Wallet',
+    'alt-a': 'Age 22 · DUO Companion',
+    'alt-b': 'Age 28 · First Home Path',
+  };
+
+  // Auto-resize iframe to its content height (same-origin: safe)
+  function autoSizeFrame(frame) {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc) return;
+      const h = doc.documentElement.scrollHeight;
+      if (h > 100) frame.style.height = h + 'px';
+    } catch (e) {}
+  }
 
   function activate(id) {
     tabs.forEach(t => t.classList.toggle('active', t.dataset.id === id));
     panels.forEach(p => p.classList.toggle('active', p.dataset.id === id));
 
-    // Lazy-load iframe on first activation
+    // Lazy-load iframe on first activation + wire up auto-resize
     const panel = document.querySelector('.panel[data-id="' + id + '"]');
     const frame = panel ? panel.querySelector('iframe') : null;
     if (frame && !loadedFrames.has(id)) {
+      frame.addEventListener('load', () => {
+        autoSizeFrame(frame);
+        // Re-measure on resize (font loading, etc.)
+        setTimeout(() => autoSizeFrame(frame), 600);
+        setTimeout(() => autoSizeFrame(frame), 1500);
+      });
       frame.src = frame.dataset.src;
       loadedFrames.add(id);
+    } else if (frame && loadedFrames.has(id)) {
+      // already loaded — just re-measure in case
+      autoSizeFrame(frame);
     }
 
     backPill.classList.toggle('visible', id !== 'home');
+
+    // Update journey nav (prev / next moment)
+    if (id === 'home') {
+      journeyNav.classList.remove('visible');
+    } else {
+      journeyNav.classList.add('visible');
+      const idx = journeyOrder.indexOf(id);
+      const prevId = idx > 0 ? journeyOrder[idx - 1] : 'home';
+      const nextId = idx < journeyOrder.length - 1 ? journeyOrder[idx + 1] : 'home';
+      const isFirst = idx === 0;
+      const isLast = idx === journeyOrder.length - 1;
+
+      navPrev.dataset.target = prevId;
+      navNext.dataset.target = nextId;
+      navPrevName.textContent = isFirst ? 'Overview' : journeyLabels[prevId];
+      navNextName.textContent = isLast ? 'Overview' : journeyLabels[nextId];
+    }
 
     // Scroll panel to top when switching
     if (panel) panel.scrollTop = 0;
@@ -568,6 +688,15 @@
   cards.forEach(c => c.addEventListener('click', () => activate(c.dataset.target)));
   document.querySelectorAll('.path-station[data-target]').forEach(s => s.addEventListener('click', () => activate(s.dataset.target)));
   backPill.addEventListener('click', () => activate('home'));
+  navPrev.addEventListener('click', () => activate(navPrev.dataset.target));
+  navNext.addEventListener('click', () => activate(navNext.dataset.target));
+
+  // Re-measure all loaded iframes on window resize
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.panel iframe').forEach(f => {
+      if (f.src) autoSizeFrame(f);
+    });
+  });
 
   // Keyboard nav
   document.addEventListener('keydown', (e) => {
