@@ -2,13 +2,12 @@
 
 A clickable prototype prepared for an interview · 2026-05-21.
 
-**One customer. One bank. Four moments along one path.**
+**One customer. One bank. Three moments along the 18–30 path.**
 
-A 25-year customer arc for Rabobank's 0–30 segment, sketched as four interconnected product journeys:
+The Growth Accelerator squad's scope is 18–30. The primary bet sits at age 18 — Shared Wallet. Two longer-arc bets sit at age 22 and 28.
 
 | Age | Moment | Role |
 |---|---|---|
-| 11 | First Goal · the Switch | Alternative C |
 | 18 | Shared Wallet · first huishouden | **Primary proposal** |
 | 22 | DUO Companion · first big debt | Alternative A |
 | 28 | First Home Path · first apartment | Alternative B |

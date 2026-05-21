@@ -198,7 +198,7 @@
 
   .path-stations {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin-top: -13px;
   }
@@ -272,7 +272,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
   }
   .card .pitch { font-size: 24px; line-height: 1.2; }
@@ -486,7 +486,6 @@
   <div class="brand"><span class="mark"></span><strong>Rabobank</strong> · Growth Accelerator 0–30 · 2026-05-21</div>
   <nav class="tabs" id="tabs">
     <button class="tab active" data-id="home"><span class="dot"></span>Overview</button>
-    <button class="tab" data-id="alt-c"><span class="dot"></span>Age 11 · First Goal</button>
     <button class="tab" data-id="main"><span class="dot"></span>Age 18 · Shared Wallet</button>
     <button class="tab" data-id="alt-a"><span class="dot"></span>Age 22 · DUO</button>
     <button class="tab" data-id="alt-b"><span class="dot"></span>Age 28 · First Home</button>
@@ -499,30 +498,23 @@
   <!-- HOME PANEL -->
   <section class="panel active" data-id="home">
     <div class="home-wrap">
-      <div class="home-eyebrow">Rabobank · Growth Accelerator 0–30 · A 25-year customer arc</div>
+      <div class="home-eyebrow">Rabobank · Growth Accelerator 18–30 · Shared Wallet / Social Finance</div>
       <h1 class="home-title">
         <em>One customer.</em> One bank.<br/>
-        <span class="softer">Four moments along <em>one path.</em></span>
+        <span class="softer">Three moments along <em>the 18–30 path.</em></span>
       </h1>
       <p class="home-sub">
-        A <em>path</em> through the 0–30 segment — not a portfolio of features. <em>If we get the 8–14 moment right, the 18–30 moments compound.</em>
+        Primary bet at age 18 — <em>Shared Wallet.</em> Around it, two longer-arc bets I considered: <em>age 22 and age 28.</em>
       </p>
 
       <!-- ═══ THE PATH ═══ -->
       <div class="path-section">
         <div class="path-track">
-          <div class="path-seg seg-c"></div>
           <div class="path-seg seg-main"></div>
           <div class="path-seg seg-a"></div>
           <div class="path-seg seg-b"></div>
         </div>
         <div class="path-stations">
-          <div class="path-station c" data-target="alt-c">
-            <div class="path-dot"></div>
-            <div class="age">Age 11</div>
-            <div class="moment">First Goal</div>
-            <div class="role">This product</div>
-          </div>
           <div class="path-station main" data-target="main">
             <div class="path-dot"></div>
             <div class="age">Age 18</div>
@@ -547,12 +539,6 @@
       <!-- DESTINATIONS along the path -->
       <div class="grid">
 
-        <article class="card alt-c" data-target="alt-c">
-          <h2 class="pitch">"Saving habits aren't taught at 25. <em>They're taught at 11.</em>"</h2>
-          <p class="body">Lars, 11, wants a Nintendo Switch. Has €40 and a silent Kinderrekening. <em>The 8–14 window where money attitudes form — and no Dutch bank is present.</em></p>
-          <span class="open">Open this moment <span class="arrow">→</span></span>
-        </article>
-
         <article class="card main" data-target="main">
           <h2 class="pitch">"Tikkie made paying easy. <em>Asking is still hard.</em>"</h2>
           <p class="body">Four housemates in Utrecht, one washing machine. <em>Insights, Savings Widget, Budgets — extended to the group.</em> The brief's literal answer.</p>
@@ -575,7 +561,7 @@
 
       <p class="home-footnote">
         <span class="blue">Walking the path in the interview</span><br/>
-        Open with Age 18 — Shared Wallet, the brief's literal answer. The other three are real moments around it. <em>If we get age 11 right, age 28 takes care of itself.</em>
+        Open with Age 18 — Shared Wallet, the brief's literal answer. The other two are future bets I considered along the same 18–30 arc.
       </p>
     </div>
   </section>
@@ -589,9 +575,6 @@
   </section>
   <section class="panel" data-id="alt-b">
     <iframe data-src="2026-05-21-alt-b-first-home-path.html" title="First Home Path journey"></iframe>
-  </section>
-  <section class="panel" data-id="alt-c">
-    <iframe data-src="2026-05-21-alt-c-first-goal.html" title="First Goal journey"></iframe>
   </section>
 
 </main>
@@ -622,11 +605,10 @@
   const navNextName = document.getElementById('navNextName');
   const loadedFrames = new Set();
 
-  // Chronological order — the 25-year arc
-  const journeyOrder = ['alt-c', 'main', 'alt-a', 'alt-b'];
+  // Chronological order — 18–30 arc
+  const journeyOrder = ['main', 'alt-a', 'alt-b'];
   const journeyLabels = {
     'home': 'Overview',
-    'alt-c': 'Age 11 · First Goal',
     'main':  'Age 18 · Shared Wallet',
     'alt-a': 'Age 22 · DUO Companion',
     'alt-b': 'Age 28 · First Home Path',
@@ -719,7 +701,7 @@
 
   // Keyboard nav
   document.addEventListener('keydown', (e) => {
-    const order = ['home', 'alt-c', 'main', 'alt-a', 'alt-b'];
+    const order = ['home', 'main', 'alt-a', 'alt-b'];
     const current = document.querySelector('.tab.active').dataset.id;
     const idx = order.indexOf(current);
     if (e.key === 'ArrowRight') activate(order[(idx + 1) % order.length]);
