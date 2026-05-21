@@ -18,18 +18,29 @@
     --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); height: 100%; overflow: hidden; }
-  body { font-family: var(--sans); -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; height: 100vh; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-overflow-scrolling: touch;
+  }
+  body {
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
 
-  /* Top bar */
+  /* Top bar — sticky across all viewports for iOS Safari compatibility */
   .topbar {
-    flex-shrink: 0;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
     padding: 16px 32px;
     display: flex;
     align-items: center;
     gap: 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   .brand {
     font-family: var(--mono);
@@ -113,29 +124,20 @@
     margin: 0 2px;
   }
 
-  /* Stage area */
+  /* Stage area — natural document flow, no absolute positioning (iOS Safari friendly) */
   .stage {
-    flex: 1;
     position: relative;
-    overflow: hidden;
   }
   .panel {
-    position: absolute;
-    inset: 0;
-    overflow-y: auto;
     background: var(--bg);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
   }
-  .panel.active {
-    opacity: 1;
-    pointer-events: auto;
+  .panel:not(.active) {
+    display: none;
   }
   .panel iframe {
     width: 100%;
     height: auto;
-    min-height: 100%;
+    min-height: 100vh;
     border: none;
     background: var(--bg);
     display: block;
@@ -454,15 +456,8 @@
     .path-station .moment { font-size: 22px; }
   }
   @media (max-width: 900px) {
-    /* Mobile / tablet: switch to natural body scroll — fixes iOS Safari iframe scroll bug */
-    html, body { height: auto; overflow: visible; -webkit-overflow-scrolling: touch; }
-    body { display: block; min-height: 100vh; }
-    .topbar { position: sticky; top: 0; z-index: 100; background: var(--paper); }
-    .stage { position: static; overflow: visible; flex: none; height: auto; }
-    .panel { position: static; inset: auto; opacity: 1; pointer-events: auto; transition: none; overflow: visible; height: auto; }
-    .panel:not(.active) { display: none; }
-    .panel iframe { min-height: auto; height: auto; }
-
+    /* Mobile / tablet portrait — responsive sizing tweaks only.
+       Natural body scroll already applies to ALL viewports for iOS Safari compatibility. */
     .topbar { padding: 12px 16px; gap: 16px; flex-wrap: wrap; }
     .help { display: none; }
     .home-wrap { padding: 40px 20px 64px; }
@@ -700,8 +695,8 @@
       navNextName.textContent = isLast ? 'Overview' : journeyLabels[nextId];
     }
 
-    // Scroll panel to top when switching
-    if (panel) panel.scrollTop = 0;
+    // Reset scroll to top when switching (document scrolls, not panel)
+    window.scrollTo(0, 0);
 
     if (location.hash.slice(1) !== id) {
       history.replaceState(null, '', '#' + id);
