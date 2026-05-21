@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>First Goal · An alternative bet · Rabobank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fafaf7; --paper: #fff; --ink: #0a0a0a; --ink-2: #595754; --ink-3: #a8a6a3;
+    --line: rgba(10,10,10,0.10); --line-2: rgba(10,10,10,0.05); --card: #f4f4f4;
+    --rabo-blue: #0072F5; --rabo-blue-soft: rgba(0,114,245,0.10);
+    --rabo-navy: #001940; --rabo-alert: #D8380E; --rabo-alert-soft: rgba(216,56,14,0.08);
+    --rabo-brand: #fa5c1e; --rabo-green: #2d7a4f; --rabo-amber: #b87333;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body { font-family: var(--sans); font-size: 19px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1080px; margin: 0 auto; padding: 96px 56px 200px; }
+
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 48px; }
+  .eyebrow .rabo-mark { display: inline-block; width: 9px; height: 9px; background: var(--rabo-brand); border-radius: 50%; margin-right: 10px; vertical-align: 1px; }
+  .eyebrow .alt-tag { color: var(--rabo-blue); margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--line); }
+
+  .hero-title { font-family: var(--serif); font-weight: 400; font-size: 84px; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin: 0; max-width: 14em; }
+  .hero-title em { font-style: italic; }
+  .hero-title .softer { color: var(--ink-2); font-style: italic; }
+  .hero-title .blue { color: var(--rabo-blue); }
+  .hero-sub { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; color: var(--ink-2); margin: 40px 0 0; max-width: 30em; }
+  .hero-sub em { color: var(--ink); }
+
+  .step { padding-top: 120px; border-top: 1px solid var(--line); margin-top: 120px; }
+  .step-num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 28px; }
+  .step-num .sep { color: var(--ink-3); margin: 0 10px; }
+  .step-num .pillar { color: var(--rabo-blue); }
+  .step-num .mockup-tag { color: var(--rabo-brand); }
+  .step-hero { font-family: var(--serif); font-weight: 400; font-size: 60px; line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin: 0 0 32px; max-width: 16em; }
+  .step-hero em { font-style: italic; }
+  .step-hero .softer { color: var(--ink-2); font-style: italic; }
+  .step-lede { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.45; color: var(--ink-2); margin: 0 0 56px; max-width: 32em; }
+  .step-lede em { color: var(--ink); }
+
+  .gap-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 24px; align-items: start; }
+  .gap-pair > div { padding-top: 18px; border-top: 2px solid var(--ink); }
+  .gap-pair > div.right { border-top-color: var(--rabo-blue); }
+  .gap-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
+  .gap-pair > div.right .gap-label { color: var(--rabo-blue); }
+  .gap-line { font-family: var(--serif); font-size: 22px; line-height: 1.4; color: var(--ink); margin: 0; }
+  .gap-line em { font-style: italic; }
+  .gap-line .softer { color: var(--ink-2); }
+
+  .mockup-wrap { display: flex; gap: 72px; align-items: center; padding: 88px 0 16px; margin-top: 64px; }
+  .mockup-wrap.right { flex-direction: row-reverse; }
+  .caption { flex: 1; }
+  .caption .cap-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rabo-blue); margin-bottom: 18px; }
+  .caption .cap-title { font-family: var(--serif); font-style: italic; font-size: 38px; line-height: 1.2; color: var(--ink); margin: 0 0 20px; letter-spacing: -0.01em; }
+  .caption .cap-body { font-size: 19px; color: var(--ink-2); line-height: 1.55; margin: 0; max-width: 22em; }
+  .caption .cap-body em { color: var(--ink); font-style: italic; }
+
+  /* Phone */
+  .phone { width: 320px; height: 680px; background: #1a1a1c; border: 1px solid rgba(10,10,10,0.10); border-radius: 46px; padding: 11px; box-shadow: 0 50px 100px rgba(10,10,10,0.16), 0 12px 32px rgba(10,10,10,0.08); flex-shrink: 0; position: relative; }
+  .screen { width: 100%; height: 100%; background: var(--paper); border-radius: 36px; overflow: hidden; position: relative; color: var(--ink); font-family: var(--sans); font-size: 12px; }
+  .notch { position: absolute; top: 19px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; background: #000; border-radius: 16px; z-index: 2; }
+  .status { position: absolute; top: 19px; left: 22px; right: 22px; display: flex; justify-content: space-between; align-items: center; z-index: 3; font-family: var(--mono); font-size: 12px; color: var(--ink); letter-spacing: 0.04em; }
+  .status .right { display: inline-flex; gap: 4px; align-items: center; }
+  .status .signal { width: 14px; height: 9px; background: linear-gradient(90deg, var(--ink) 80%, rgba(10,10,10,0.2) 80%); border-radius: 2px; }
+  .status .batt { display: inline-block; width: 22px; height: 11px; border: 1px solid rgba(10,10,10,0.5); border-radius: 3px; position: relative; }
+  .status .batt::after { content: ""; position: absolute; right: -3px; top: 3px; width: 2px; height: 5px; background: rgba(10,10,10,0.5); border-radius: 1px; }
+  .status .batt::before { content: ""; position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: var(--ink); border-radius: 1px; }
+  .screen-inner { padding: 64px 20px 20px; height: 100%; display: flex; flex-direction: column; }
+  .num-tabular { font-variant-numeric: tabular-nums; }
+
+  .rabo-topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .rabo-topbar .ico { width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; position: relative; }
+  .rabo-topbar .ico::before { content: ""; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 1.5px; height: 8px; background: var(--ink); }
+  .rabo-topbar .title { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--rabo-blue); }
+  .rabo-topbar .actions { display: flex; gap: 12px; }
+  .rabo-topbar .actions span { width: 18px; height: 18px; border: 1.5px solid var(--ink); display: inline-block; }
+  .rabo-topbar .actions .search { border-radius: 50%; }
+  .rabo-topbar .actions .chat { border-radius: 4px 4px 4px 0; }
+
+  /* ── M1 · Goal setting ── */
+  .goal-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8px; }
+  .goal-q { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.15; color: var(--ink); margin: 0 0 16px; }
+  .goal-card { padding: 16px; background: var(--card); border-radius: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 14px; }
+  .goal-icon { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, #ff4d4d, #c62828); position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .goal-icon::before { content: ""; position: absolute; width: 36px; height: 18px; background: var(--paper); border-radius: 20px 20px 0 0; bottom: 12px; }
+  .goal-icon::after { content: ""; position: absolute; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; top: 18px; left: 18px; box-shadow: 18px 0 var(--ink); }
+  .goal-name { font-family: var(--sans); font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+  .goal-price { font-family: var(--mono); font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .goal-row { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line-2); font-size: 13px; }
+  .goal-row:last-of-type { border-bottom: none; }
+  .goal-row .lbl { color: var(--ink-2); }
+  .goal-row .val { font-family: var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .goal-progress-wrap { padding: 14px; background: var(--rabo-blue-soft); border-radius: 12px; margin-top: 14px; }
+  .goal-progress-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rabo-blue); margin-bottom: 8px; }
+  .goal-progress-bar { height: 8px; background: rgba(0,114,245,0.18); border-radius: 4px; overflow: hidden; }
+  .goal-progress-bar .fill { height: 100%; width: 11%; background: var(--rabo-blue); border-radius: 4px; }
+  .goal-progress-suggest { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink); margin-top: 12px; line-height: 1.4; }
+  .goal-progress-suggest strong { font-style: normal; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--rabo-blue); }
+  .goal-match { margin-top: 14px; padding: 12px 14px; background: linear-gradient(180deg, rgba(45,122,79,0.10), rgba(45,122,79,0.02)); border: 1px solid rgba(45,122,79,0.25); border-radius: 12px; font-size: 12px; line-height: 1.4; color: var(--ink); }
+  .goal-match strong { color: var(--rabo-green); font-weight: 600; }
+  .goal-cta { margin-top: auto; background: var(--rabo-blue); color: #fff; padding: 13px 0; border-radius: 12px; font-size: 13px; font-weight: 600; text-align: center; }
+
+  /* ── M2 · Smart coaching ── */
+  .coach-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8px; }
+  .coach-tx { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .coach-tx .what { font-size: 13px; color: var(--ink); }
+  .coach-tx .what .sub { display: block; font-family: var(--mono); font-size: 10px; color: var(--ink-2); margin-top: 3px; letter-spacing: 0.05em; }
+  .coach-tx .amt { font-family: var(--mono); font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .coach-title { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.2; color: var(--ink); margin: 0 0 16px; }
+  .coach-vis { padding: 14px; background: var(--card); border-radius: 12px; margin-bottom: 16px; }
+  .coach-vis .top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8px; }
+  .coach-vis .bar { height: 8px; background: #e8e8e8; border-radius: 4px; position: relative; overflow: hidden; }
+  .coach-vis .bar .now { position: absolute; left: 0; top: 0; bottom: 0; width: 32%; background: var(--rabo-blue); border-radius: 4px; }
+  .coach-vis .bar .future { position: absolute; left: 32%; top: 0; bottom: 0; width: 6%; background: var(--rabo-green); border-radius: 0 4px 4px 0; }
+  .coach-vis .legend { display: flex; gap: 14px; margin-top: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--ink-2); }
+  .coach-vis .legend .l { display: inline-flex; align-items: center; gap: 6px; }
+  .coach-vis .legend .l::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--rabo-blue); }
+  .coach-vis .legend .l.future::before { background: var(--rabo-green); }
+  .coach-msg { padding: 16px; background: var(--rabo-blue-soft); border-radius: 14px; margin-bottom: 14px; }
+  .coach-msg-head { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rabo-blue); margin-bottom: 8px; }
+  .coach-msg-body { font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.35; color: var(--ink); }
+  .coach-msg-body strong { font-style: normal; color: var(--rabo-blue); font-weight: 600; }
+  .coach-actions { display: flex; flex-direction: column; gap: 7px; }
+  .coach-btn { padding: 11px 13px; border-radius: 10px; font-size: 12.5px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .coach-btn.primary { background: var(--rabo-green); color: #fff; border-color: var(--rabo-green); font-weight: 600; }
+  .coach-btn .chev { color: var(--ink-3); font-size: 16px; }
+  .coach-btn.primary .chev { color: rgba(255,255,255,0.85); }
+  .coach-footer { margin-top: auto; text-align: center; font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); padding-top: 16px; }
+
+  /* ── M3 · Celebration ── */
+  .cel-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rabo-green); margin-bottom: 10px; }
+  .cel-title { font-family: var(--serif); font-style: italic; font-size: 36px; line-height: 1.05; color: var(--ink); margin: 0 0 6px; }
+  .cel-sub { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-2); margin: 0 0 22px; }
+  .cel-hero { padding: 18px 16px; border-radius: 16px; background: linear-gradient(180deg, rgba(45,122,79,0.16) 0%, rgba(45,122,79,0.04) 100%); border: 1px solid rgba(45,122,79,0.30); margin-bottom: 14px; text-align: center; }
+  .cel-hero-num { font-family: var(--serif); font-size: 38px; color: var(--rabo-green); line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+  .cel-hero-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rabo-green); }
+  .cel-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line-2); font-size: 12.5px; }
+  .cel-row:last-of-type { border-bottom: none; }
+  .cel-row .lbl { color: var(--ink-2); }
+  .cel-row .val { font-family: var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .cel-row .val.match { color: var(--rabo-green); }
+  .cel-next { margin-top: 14px; padding: 14px; background: var(--rabo-blue-soft); border-radius: 12px; font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink); line-height: 1.4; }
+  .cel-next strong { font-style: normal; color: var(--rabo-blue); font-weight: 600; font-family: var(--sans); font-size: 13px; }
+  .cel-cta { margin-top: auto; background: var(--rabo-blue); color: #fff; padding: 13px 0; border-radius: 12px; font-size: 13px; font-weight: 600; text-align: center; }
+
+  /* Closing prose */
+  .prose-section { margin-top: 144px; padding-top: 96px; border-top: 1px solid var(--line); }
+  .section-eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px; }
+  .section-title { font-family: var(--serif); font-size: 52px; line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin: 0 0 32px; font-weight: 400; max-width: 16em; }
+  .section-title em { font-style: italic; }
+  .section-title .softer { color: var(--ink-2); font-style: italic; }
+  .section-title .blue { color: var(--rabo-blue); }
+  .prose { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.5; color: var(--ink-2); max-width: 32em; margin: 0; }
+  .prose em { color: var(--ink); }
+
+  .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; }
+  .month { border-top: 3px solid var(--line); padding-top: 22px; position: relative; }
+  .month::before { content: ""; position: absolute; top: -8px; left: 0; width: 13px; height: 13px; background: var(--bg); border: 3px solid var(--line); border-radius: 50%; }
+  .month.m1::before { border-color: var(--rabo-navy); }
+  .month.m3::before { border-color: var(--rabo-blue); background: var(--rabo-blue); }
+  .month.m45::before { border-color: var(--rabo-brand); background: var(--rabo-brand); }
+  .month.m6::before { border-color: var(--rabo-green); background: var(--rabo-green); }
+  .month .when { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+  .month .what { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--ink); margin: 0 0 14px; line-height: 1.15; }
+  .month .detail { font-size: 15px; color: var(--ink-2); line-height: 1.5; margin: 0; }
+  .month .detail em { color: var(--ink); font-style: italic; }
+
+  /* Lifetime arc */
+  .arc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+  .arc-step { padding: 22px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+  .arc-age { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rabo-blue); margin-bottom: 10px; font-weight: 600; }
+  .arc-what { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink); margin-bottom: 8px; line-height: 1.15; }
+  .arc-prod { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+
+  .epilog-title { font-family: var(--serif); font-size: 72px; line-height: 1.04; color: var(--ink); letter-spacing: -0.02em; margin: 0 0 32px; max-width: 14em; }
+  .epilog-title em { font-style: italic; }
+  .epilog-title .softer { color: var(--ink-2); font-style: italic; }
+  .epilog-tag { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--rabo-blue); margin: 56px 0 0; }
+  .foot { margin-top: 144px; padding-top: 56px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); display: flex; justify-content: space-between; align-items: center; }
+  .foot .rabo-tag { color: var(--rabo-brand); }
+  .foot .alt-tag { color: var(--rabo-blue); }
+
+  @media (max-width: 760px) {
+    .page { padding: 56px 24px 96px; }
+    .hero-title { font-size: 48px; }
+    .step-hero { font-size: 40px; }
+    .section-title { font-size: 36px; }
+    .epilog-title { font-size: 48px; }
+    .gap-pair { grid-template-columns: 1fr; gap: 32px; }
+    .mockup-wrap, .mockup-wrap.right { flex-direction: column; gap: 40px; padding: 56px 0 8px; }
+    .phone { margin: 0 auto; }
+    .roadmap, .arc { grid-template-columns: 1fr 1fr; }
+    .caption .cap-title { font-size: 28px; }
+    .caption .cap-body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- HERO -->
+  <section>
+    <div class="eyebrow"><span class="rabo-mark"></span>Rabobank · Growth Accelerator 0–30<span class="alt-tag">Alternative C · First Goal</span></div>
+    <h1 class="hero-title">
+      Saving habits aren't <em>taught at 25.</em><br />
+      <span class="softer">They're <em>taught at 11.</em></span>
+    </h1>
+    <p class="hero-sub">
+      Lars, 11. Eindhoven. Allowance, birthday money, Sinterklaas.<br />
+      Three product moments where Rabobank becomes the <em>first place</em> a child learns trade-offs.
+    </p>
+  </section>
+
+  <!-- 00 · TRIGGER -->
+  <section class="step">
+    <div class="step-num">00 <span class="sep">·</span> Trigger</div>
+    <h2 class="step-hero">"Lars wants a Switch. <span class="softer">He has €40. <em>What now?"</em></span></h2>
+    <p class="step-lede">Allowance, opa's birthday gift, Sinterklaas money. <em>Real money lives in his Kinderrekening.</em> But the account is silent — and so are we.</p>
+    <div class="gap-pair">
+      <div>
+        <div class="gap-label">Today</div>
+        <p class="gap-line">Kinderrekening shows a balance. <span class="softer">Parents say <em>"save up"</em>. No mechanism, no learning, no celebration.</span></p>
+      </div>
+      <div class="right">
+        <div class="gap-label">Rabobank can</div>
+        <p class="gap-line">Make the <em>first goal</em> a real product moment — at 11, not at 25.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 · GOAL · M1 -->
+  <section class="step">
+    <div class="step-num">01 <span class="sep">·</span> <span class="pillar">Set the goal</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M1</span></div>
+    <h2 class="step-hero">What do you <em>want?</em></h2>
+    <p class="step-lede">Pick it. Price it. <em>Pick a date.</em> The app does the math — and the parents can chip in.</p>
+
+    <div class="mockup-wrap">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">My first goal</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="goal-eyebrow">Lars, 11 · Eindhoven</div>
+          <h3 class="goal-q">What are you saving for?</h3>
+
+          <div class="goal-card">
+            <div class="goal-icon"></div>
+            <div>
+              <div class="goal-name">Nintendo Switch</div>
+              <div class="goal-price num-tabular">€350</div>
+            </div>
+          </div>
+
+          <div class="goal-row"><span class="lbl">By when?</span><span class="val">14 Oct · my birthday</span></div>
+          <div class="goal-row"><span class="lbl">You have today</span><span class="val">€40</span></div>
+          <div class="goal-row"><span class="lbl">You need</span><span class="val">€310 more</span></div>
+
+          <div class="goal-progress-wrap">
+            <div class="goal-progress-top"><span>your goal</span><span class="num-tabular">11%</span></div>
+            <div class="goal-progress-bar"><div class="fill"></div></div>
+            <div class="goal-progress-suggest">"Save <strong>€78 / month</strong> — or skip the Friday candy twice a week."</div>
+          </div>
+
+          <div class="goal-match"><strong>Mom &amp; Dad</strong> add <strong>€0.50</strong> for every <strong>€1</strong> you save · they signed it.</div>
+
+          <div class="goal-cta">Make this my goal</div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M1 · Set the goal</div>
+        <h3 class="cap-title">An 11-year-old's <em>first product moment.</em></h3>
+        <p class="cap-body">Picking a goal. Picking a date. Seeing the math. <em>That's the first time a Dutch child experiences money as a choice with a horizon — not just a number.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · COACHING · M2 -->
+  <section class="step">
+    <div class="step-num">02 <span class="sep">·</span> <span class="pillar">Smart trade-offs</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M2 · the differentiator</span></div>
+    <h2 class="step-hero">You bought candy. <span class="softer"><em>You're still okay.</em></span></h2>
+    <p class="step-lede">Not a lecture. <em>Not gamification.</em> Just clear cause-and-effect, in a kid's language.</p>
+
+    <div class="mockup-wrap right">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">Right after</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="coach-eyebrow">14:32 · just now</div>
+          <div class="coach-tx">
+            <div class="what">You bought candy<span class="sub">albert heijn · friday</span></div>
+            <div class="amt">−€3</div>
+          </div>
+
+          <h3 class="coach-title">Your Switch is <em>still on track.</em></h3>
+
+          <div class="coach-vis">
+            <div class="top"><span>where you are</span><span class="num-tabular">€42 of €350</span></div>
+            <div class="bar"><div class="now"></div><div class="future"></div></div>
+            <div class="legend">
+              <span class="l">today</span>
+              <span class="l future">if you skip next Friday too</span>
+            </div>
+          </div>
+
+          <div class="coach-msg">
+            <div class="coach-msg-head">A small idea</div>
+            <div class="coach-msg-body">"If you <strong>skip candy next Friday too</strong>, you're <strong>5 days closer</strong> to the Switch."</div>
+          </div>
+
+          <div class="coach-actions">
+            <div class="coach-btn primary"><span>Good idea — skip it</span><span class="chev">›</span></div>
+            <div class="coach-btn"><span>I'll save more next week</span><span class="chev">›</span></div>
+            <div class="coach-btn"><span>Remind me later</span><span class="chev">›</span></div>
+          </div>
+
+          <div class="coach-footer">Only Lars sees this · parents see "on track"</div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M2 · The differentiator</div>
+        <h3 class="cap-title">A coach, <em>not a chart.</em></h3>
+        <p class="cap-body">Three age-appropriate options — none of them lecture. <em>The child stays in charge.</em> The parent sees only the summary, not the candy. Trust built where it matters: between the child and their own choices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · CELEBRATION · M3 -->
+  <section class="step">
+    <div class="step-num">03 <span class="sep">·</span> <span class="pillar">Celebrate &amp; loop</span> <span class="sep">·</span> <span class="mockup-tag">Mockup M3</span></div>
+    <h2 class="step-hero">You did it. <span class="softer"><em>Here's how.</em></span></h2>
+    <p class="step-lede">The goal lands. <em>The story is told — to Lars, and to his parents.</em> Then the next loop begins.</p>
+
+    <div class="mockup-wrap">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="status"><span>9:41</span><span class="right"><span class="signal"></span><span style="font-size:11px;">5G</span><span class="batt"></span></span></div>
+        <div class="screen-inner">
+          <div class="rabo-topbar"><span class="ico"></span><span class="title">You did it</span><span class="actions"><span class="search"></span><span class="chat"></span></span></div>
+          <div class="cel-eyebrow">14 Oct · today · your birthday</div>
+          <h3 class="cel-title">Switch unlocked.</h3>
+          <p class="cel-sub">142 days. 11 years old. First big goal hit.</p>
+
+          <div class="cel-hero">
+            <div class="cel-hero-num">€350</div>
+            <div class="cel-hero-label">saved · matched · earned</div>
+          </div>
+
+          <div class="cel-row"><span class="lbl">You saved</span><span class="val">€230</span></div>
+          <div class="cel-row"><span class="lbl">Mom &amp; Dad matched</span><span class="val match">+€120</span></div>
+          <div class="cel-row"><span class="lbl">Skipped Fridays</span><span class="val">18 candies</span></div>
+          <div class="cel-row"><span class="lbl">Best week</span><span class="val">€15</span></div>
+
+          <div class="cel-next"><strong>What's next?</strong> A guitar? Headphones? A trip with friends? — Saving's a habit now.</div>
+
+          <div class="cel-cta">Pick the next goal</div>
+        </div>
+      </div></div>
+      <div class="caption">
+        <div class="cap-eyebrow">M3 · Celebrate &amp; loop</div>
+        <h3 class="cap-title">The recap that <em>becomes a habit.</em></h3>
+        <p class="cap-body">Numbers that mean something to an 11-year-old: <em>18 candies skipped, parents matched €120, 142 days.</em> The recap is the moment the habit locks in — and the next goal is one tap away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="prose-section">
+    <div class="section-eyebrow">The wedge · the silent Kinderrekening</div>
+    <h2 class="section-title">Who actually <span class="blue"><em>teaches</em></span> an 11-year-old?</h2>
+    <p class="prose">ING, ABN, Rabobank all show a balance. Bunq Junior adds a card. Revolut &lt;18 adds spending limits. <em>Nobody coaches the trade-off.</em> Nobody turns the first saved euro into a lesson — and the second one into a habit. That's the wedge: the 8–14 window where attitudes form, and where no Dutch bank is present.</p>
+  </section>
+
+  <!-- LIFETIME ARC -->
+  <section class="prose-section">
+    <div class="section-eyebrow">The 25-year arc · why this fits 0–30</div>
+    <h2 class="section-title">One child. <span class="softer">One bank. <em>Four moments.</em></span></h2>
+    <p class="prose" style="margin-bottom: 8px;">If we get the 8–14 moment right, the 18–30 moments compound. <em>Same customer, same Rabobank, twenty-five years.</em></p>
+    <div class="arc">
+      <div class="arc-step">
+        <div class="arc-age">Age 11</div>
+        <div class="arc-what">First Goal<br/>· the Switch ·</div>
+        <div class="arc-prod">This product</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-age">Age 18</div>
+        <div class="arc-what">Shared Wallet<br/>· first huishouden ·</div>
+        <div class="arc-prod">Primary proposal</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-age">Age 22</div>
+        <div class="arc-what">DUO Companion<br/>· first big debt ·</div>
+        <div class="arc-prod">Alternative A</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-age">Age 28</div>
+        <div class="arc-what">First Home Path<br/>· first apartment ·</div>
+        <div class="arc-prod">Alternative B</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="prose-section">
+    <div class="section-eyebrow">First 6 months · tangible</div>
+    <h2 class="section-title">Four milestones. <span class="softer">Built on top of the existing Kinderrekening.</span></h2>
+    <div class="roadmap">
+      <div class="month m1"><div class="when">Month 1–2</div><h3 class="what">Discovery</h3><p class="detail">30 child + parent interviews · age 8–14 · across income brackets. <em>Listen to kids about money.</em></p></div>
+      <div class="month m3"><div class="when">Month 3</div><h3 class="what">First MVP</h3><p class="detail">Goal-setting + match (M1) on existing Kinderrekening. <em>No coach yet, no celebration.</em></p></div>
+      <div class="month m45"><div class="when">Month 4–5</div><h3 class="what">Pilot</h3><p class="detail">200 families · add smart coach (M2). Measure goal-completion rate.</p></div>
+      <div class="month m6"><div class="when">Month 6</div><h3 class="what">First metric report</h3><p class="detail"><em>% of children who set a second goal</em> within 30 days of completing the first.</p></div>
+    </div>
+  </section>
+
+  <!-- EPILOG -->
+  <section class="prose-section">
+    <div class="section-eyebrow">Epilog</div>
+    <h2 class="epilog-title">
+      The Switch <em>unlocked</em> the habit.<br />
+      <span class="softer">The habit unlocks <em>everything else.</em></span>
+    </h2>
+    <p class="epilog-tag">Catch them at 11.<br />Walk with them to 28.</p>
+    <div class="foot">
+      <span>First Goal · An alternative bet</span>
+      <span class="alt-tag">Rabobank · 2026-05-21</span>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

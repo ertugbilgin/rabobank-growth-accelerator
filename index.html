@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rabobank Growth Accelerator 0–30 · Four Product Bets · Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fafaf7; --paper: #fff; --ink: #0a0a0a; --ink-2: #595754; --ink-3: #a8a6a3;
+    --line: rgba(10,10,10,0.10); --line-2: rgba(10,10,10,0.05);
+    --rabo-blue: #0072F5; --rabo-blue-soft: rgba(0,114,245,0.10);
+    --rabo-brand: #fa5c1e; --rabo-green: #2d7a4f; --rabo-amber: #b87333;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); height: 100%; overflow: hidden; }
+  body { font-family: var(--sans); -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; height: 100vh; }
+
+  /* Top bar */
+  .topbar {
+    flex-shrink: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .brand .mark {
+    width: 9px; height: 9px;
+    background: var(--rabo-brand);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .brand strong { color: var(--ink); font-weight: 500; }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tab:hover {
+    background: var(--line-2);
+    color: var(--ink);
+  }
+  .tab .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .tab[data-id="home"] .dot { background: var(--rabo-brand); }
+  .tab[data-id="main"] .dot { background: var(--rabo-blue); }
+  .tab[data-id="alt-a"] .dot { background: var(--rabo-navy, #001940); }
+  .tab[data-id="alt-b"] .dot { background: var(--rabo-amber); }
+  .tab[data-id="alt-c"] .dot { background: var(--rabo-green); }
+  .tab.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .tab.active .dot { background: var(--paper); }
+
+  .help {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .help kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 10px;
+    margin: 0 2px;
+  }
+
+  /* Stage area */
+  .stage {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    background: var(--bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .panel.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .panel iframe {
+    width: 100%;
+    min-height: 100%;
+    border: none;
+    background: var(--bg);
+    display: block;
+  }
+
+  /* Home panel */
+  .home-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 64px 56px 96px;
+  }
+  .home-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 32px;
+  }
+  .home-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    max-width: 16em;
+  }
+  .home-title em { font-style: italic; }
+  .home-title .softer { color: var(--ink-2); font-style: italic; }
+  .home-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin: 0 0 56px;
+    max-width: 36em;
+  }
+  .home-sub em { color: var(--ink); }
+
+  /* ═══ THE PATH · timeline visualization ═══ */
+  .path-section {
+    margin: 80px 0 72px;
+  }
+  .path-track {
+    display: flex;
+    height: 3px;
+    border-radius: 2px;
+    margin: 0 12.5%;
+    overflow: hidden;
+  }
+  .path-seg { flex: 1; }
+  .path-seg.seg-c    { background: var(--rabo-green); }
+  .path-seg.seg-main { background: var(--rabo-blue); }
+  .path-seg.seg-a    { background: #001940; }
+  .path-seg.seg-b    { background: var(--rabo-amber); }
+
+  .path-stations {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: -13px;
+  }
+  .path-station {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 0 4px;
+  }
+  .path-station:hover { transform: translateY(-3px); }
+  .path-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 4px solid var(--ink-3);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .path-station:hover .path-dot { transform: scale(1.18); }
+  .path-station.c    .path-dot { border-color: var(--rabo-green); }
+  .path-station.a    .path-dot { border-color: #001940; }
+  .path-station.b    .path-dot { border-color: var(--rabo-amber); }
+  .path-station.main .path-dot {
+    border-color: var(--rabo-blue);
+    background: var(--rabo-blue);
+    width: 30px; height: 30px;
+    margin-top: -3px;
+    box-shadow: 0 0 0 7px rgba(0,114,245,0.14);
+  }
+  .path-station .age {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+  .path-station.c    .age { color: var(--rabo-green); }
+  .path-station.main .age { color: var(--rabo-blue); }
+  .path-station.a    .age { color: #001940; }
+  .path-station.b    .age { color: var(--rabo-amber); }
+  .path-station .moment {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    color: var(--ink);
+    margin-top: 12px;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  .path-station .role {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 10px;
+  }
+  .path-station.main .role { color: var(--rabo-blue); font-weight: 600; }
+
+  /* Each card carries a top accent matching its station */
+  .card { border-top-width: 4px; }
+  .card.alt-c { border-top-color: var(--rabo-green); }
+  .card.main  { border-top-color: var(--rabo-blue); }
+  .card.alt-a { border-top-color: #001940; }
+  .card.alt-b { border-top-color: var(--rabo-amber); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  .card .pitch { font-size: 24px; line-height: 1.2; }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 24px 24px;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px rgba(10,10,10,0.06), 0 4px 12px rgba(10,10,10,0.04);
+    border-color: rgba(10,10,10,0.16);
+  }
+  .card .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card .tag .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .card.main .tag .dot { background: var(--rabo-blue); }
+  .card.alt-a .tag .dot { background: #001940; }
+  .card.alt-b .tag .dot { background: var(--rabo-amber); }
+  .card.alt-c .tag .dot { background: var(--rabo-green); }
+  .card.main .tag { color: var(--rabo-blue); }
+  .card.alt-a .tag { color: #001940; }
+  .card.alt-b .tag { color: var(--rabo-amber); }
+  .card.alt-c .tag { color: var(--rabo-green); }
+
+  .card .pitch {
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 1.12;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+  }
+  .card.main { border-color: rgba(0,114,245,0.30); }
+  .card .pitch em { font-style: italic; }
+  .card .pitch .softer { color: var(--ink-2); font-style: italic; }
+
+  .card .body {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0 0 24px;
+    flex: 1;
+  }
+  .card .body em { font-style: italic; color: var(--ink); }
+
+  .card .open {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  .card.main .open { color: var(--rabo-blue); }
+  .card.alt-a .open { color: #001940; }
+  .card.alt-b .open { color: var(--rabo-amber); }
+  .card.alt-c .open { color: var(--rabo-green); }
+  .card .open .arrow {
+    display: inline-block;
+    transform: translateX(0);
+    transition: transform 0.18s;
+  }
+  .card:hover .open .arrow { transform: translateX(4px); }
+
+  .home-footnote {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 36em;
+  }
+  .home-footnote em { color: var(--ink); }
+  .home-footnote .blue { color: var(--rabo-blue); font-style: normal; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+  /* Floating back-to-home — visible inside journey iframes */
+  .back-pill {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(10,10,10,0.18);
+    display: none;
+  }
+  .back-pill.visible { display: inline-flex; align-items: center; gap: 8px; }
+  .back-pill:hover { background: var(--rabo-blue); }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .path-track { margin: 0 6%; }
+    .path-stations { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .path-station .moment { font-size: 22px; }
+  }
+  @media (max-width: 760px) {
+    .topbar { padding: 12px 16px; gap: 16px; flex-wrap: wrap; }
+    .help { display: none; }
+    .home-wrap { padding: 40px 20px 64px; }
+    .home-title { font-size: 44px; }
+    .home-sub { font-size: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .card .pitch { font-size: 20px; }
+
+    .path-section { margin: 48px 0 40px; }
+    .path-track { display: none; }
+    .path-stations { grid-template-columns: 1fr; gap: 28px; margin-top: 0; }
+    .path-station { flex-direction: row; align-items: center; text-align: left; gap: 16px; padding: 0; }
+    .path-station .age { margin-top: 0; flex-shrink: 0; min-width: 70px; }
+    .path-station .moment { margin-top: 0; font-size: 22px; flex: 1; }
+    .path-station .role { display: none; }
+    .path-station .path-dot { margin-top: 0; width: 16px; height: 16px; }
+    .path-station.main .path-dot { width: 18px; height: 18px; box-shadow: 0 0 0 4px rgba(0,114,245,0.14); }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><span class="mark"></span><strong>Rabobank</strong> · Growth Accelerator 0–30 · 2026-05-21</div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-id="home"><span class="dot"></span>Overview</button>
+    <button class="tab" data-id="main"><span class="dot"></span>Shared Wallet</button>
+    <button class="tab" data-id="alt-a"><span class="dot"></span>Alt A · DUO</button>
+    <button class="tab" data-id="alt-b"><span class="dot"></span>Alt B · First Home</button>
+    <button class="tab" data-id="alt-c"><span class="dot"></span>Alt C · First Goal</button>
+  </nav>
+  <div class="help">Tab <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+</header>
+
+<main class="stage">
+
+  <!-- HOME PANEL -->
+  <section class="panel active" data-id="home">
+    <div class="home-wrap">
+      <div class="home-eyebrow">Rabobank · Growth Accelerator 0–30 · A 25-year customer arc</div>
+      <h1 class="home-title">
+        <em>One customer.</em> One bank.<br/>
+        <span class="softer">Four moments along <em>one path.</em></span>
+      </h1>
+      <p class="home-sub">
+        A <em>path</em> through the 0–30 segment — not a portfolio of features. <em>If we get the 8–14 moment right, the 18–30 moments compound.</em>
+      </p>
+
+      <!-- ═══ THE PATH ═══ -->
+      <div class="path-section">
+        <div class="path-track">
+          <div class="path-seg seg-c"></div>
+          <div class="path-seg seg-main"></div>
+          <div class="path-seg seg-a"></div>
+          <div class="path-seg seg-b"></div>
+        </div>
+        <div class="path-stations">
+          <div class="path-station c" data-target="alt-c">
+            <div class="path-dot"></div>
+            <div class="age">Age 11</div>
+            <div class="moment">First Goal</div>
+            <div class="role">This product</div>
+          </div>
+          <div class="path-station main" data-target="main">
+            <div class="path-dot"></div>
+            <div class="age">Age 18</div>
+            <div class="moment">Shared Wallet</div>
+            <div class="role">Primary</div>
+          </div>
+          <div class="path-station a" data-target="alt-a">
+            <div class="path-dot"></div>
+            <div class="age">Age 22</div>
+            <div class="moment">DUO Companion</div>
+            <div class="role">Alternative A</div>
+          </div>
+          <div class="path-station b" data-target="alt-b">
+            <div class="path-dot"></div>
+            <div class="age">Age 28</div>
+            <div class="moment">First Home Path</div>
+            <div class="role">Alternative B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESTINATIONS along the path -->
+      <div class="grid">
+
+        <article class="card alt-c" data-target="alt-c">
+          <h2 class="pitch">"Saving habits aren't taught at 25. <em>They're taught at 11.</em>"</h2>
+          <p class="body">Lars, 11, wants a Nintendo Switch. Has €40 and a silent Kinderrekening. <em>The 8–14 window where money attitudes form — and no Dutch bank is present.</em></p>
+          <span class="open">Open this moment <span class="arrow">→</span></span>
+        </article>
+
+        <article class="card main" data-target="main">
+          <h2 class="pitch">"Tikkie made paying easy. <em>Asking is still hard.</em>"</h2>
+          <p class="body">Four housemates in Utrecht, one washing machine. <em>Insights, Savings Widget, Budgets — extended to the group.</em> The brief's literal answer.</p>
+          <span class="open">Open this moment <span class="arrow">→</span></span>
+        </article>
+
+        <article class="card alt-a" data-target="alt-a">
+          <h2 class="pitch">"You repay it for 35 years. <em>Your bank has never mentioned it.</em>"</h2>
+          <p class="body">A 27-year-old, four years into a DUO loan she barely understands. <em>The largest line item in a Dutch graduate's life — and no bank treats it as a relationship.</em></p>
+          <span class="open">Open this moment <span class="arrow">→</span></span>
+        </article>
+
+        <article class="card alt-b" data-target="alt-b">
+          <h2 class="pitch">"Banks talk the day you apply. <em>We can start four years earlier.</em>"</h2>
+          <p class="body">A 26-year-old, three years from a mortgage application, zero guidance in between. <em>The four-year companion the housing crisis demands.</em></p>
+          <span class="open">Open this moment <span class="arrow">→</span></span>
+        </article>
+
+      </div>
+
+      <p class="home-footnote">
+        <span class="blue">Walking the path in the interview</span><br/>
+        Open with Age 18 — Shared Wallet, the brief's literal answer. The other three are real moments around it. <em>If we get age 11 right, age 28 takes care of itself.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- JOURNEY IFRAMES -->
+  <section class="panel" data-id="main">
+    <iframe data-src="2026-05-21-shared-wallet-journey-rabobank.html" title="Shared Wallet journey"></iframe>
+  </section>
+  <section class="panel" data-id="alt-a">
+    <iframe data-src="2026-05-21-alt-a-duo-companion.html" title="DUO Companion journey"></iframe>
+  </section>
+  <section class="panel" data-id="alt-b">
+    <iframe data-src="2026-05-21-alt-b-first-home-path.html" title="First Home Path journey"></iframe>
+  </section>
+  <section class="panel" data-id="alt-c">
+    <iframe data-src="2026-05-21-alt-c-first-goal.html" title="First Goal journey"></iframe>
+  </section>
+
+</main>
+
+<button class="back-pill" id="backPill">← Overview</button>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  const cards = document.querySelectorAll('.card[data-target]');
+  const backPill = document.getElementById('backPill');
+  const loadedFrames = new Set();
+
+  function activate(id) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.id === id));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.id === id));
+
+    // Lazy-load iframe on first activation
+    const panel = document.querySelector('.panel[data-id="' + id + '"]');
+    const frame = panel ? panel.querySelector('iframe') : null;
+    if (frame && !loadedFrames.has(id)) {
+      frame.src = frame.dataset.src;
+      loadedFrames.add(id);
+    }
+
+    backPill.classList.toggle('visible', id !== 'home');
+
+    // Scroll panel to top when switching
+    if (panel) panel.scrollTop = 0;
+
+    if (location.hash.slice(1) !== id) {
+      history.replaceState(null, '', '#' + id);
+    }
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.id)));
+  cards.forEach(c => c.addEventListener('click', () => activate(c.dataset.target)));
+  document.querySelectorAll('.path-station[data-target]').forEach(s => s.addEventListener('click', () => activate(s.dataset.target)));
+  backPill.addEventListener('click', () => activate('home'));
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    const order = ['home', 'main', 'alt-a', 'alt-b', 'alt-c'];
+    const current = document.querySelector('.tab.active').dataset.id;
+    const idx = order.indexOf(current);
+    if (e.key === 'ArrowRight') activate(order[(idx + 1) % order.length]);
+    if (e.key === 'ArrowLeft')  activate(order[(idx - 1 + order.length) % order.length]);
+    if (e.key === 'Escape')     activate('home');
+  });
+
+  // Open from URL hash
+  const initial = location.hash.slice(1);
+  if (['main','alt-a','alt-b','alt-c'].includes(initial)) activate(initial);
+</script>
+
+</body>
+</html>
